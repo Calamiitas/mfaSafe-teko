@@ -94,7 +94,6 @@ void setup() {
 
 void loop()
    {
-     start:
   if (!mfrc522.PICC_IsNewCardPresent()) {
     return;
   }
@@ -135,13 +134,12 @@ void loop()
     lcd.setCursor(0, 0);          //Hier wird die Position des ersten Zeichens festgelegt. In diesem Fall bedeutet (0,0) das erste Zeichen in der ersten Zeile.
     lcd.print("NOPE NOPE NOPE");  //Die LED leuchtet auf, wenn eine ungültige Karte gelesen wird
     delay(2000);                  //Das ist die Dauer einer leuchtenden LED
-    digitalWrite(11, LOW);
-    goto start;  //LED löscht wieder ab
+    digitalWrite(11, LOW);        //LED löscht wieder ab 
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Anfang:                         // Dies ist eine Markierung, zu der per "goto-"Befehl gesprungen werden kann.
+                        // Dies ist eine Markierung, zu der per "goto-"Befehl gesprungen werden kann.
   Taste = Tastenfeld.getKey();  //Mit Unter der Variablen pressedKey entspricht der gedrückten Taste
   if (Taste && rfidOk == true)                    //Wenn eine Taste gedrückt wurde...
                                 //Ab hier werden die Eingaben des Tastenfeldes verarbeitet. Zunächst die "*"Taste, da diese eine Sonderfunktion für die Verriegelung besitzt und danach die #-Taste, nach deren Eingabe der zuvor eingegebene Code auf Richtigkeit geprüft wird.
@@ -158,7 +156,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
       z2 = 1;
       z3 = 1;
       z4 = 1;       // Zugang zur ersten Zeicheneingabe freischalten
-      goto Anfang;  //An dieser Stelle springt der Sketch zur Eingabe der Taste zurück, damit das Zeichen "*" nicht im folgenden Abschlitt als Codeeingabe gewertet wird.
+       //An dieser Stelle springt der Sketch zur Eingabe der Taste zurück, damit das Zeichen "*" nicht im folgenden Abschlitt als Codeeingabe gewertet wird.
     }
 
     if (Taste == '#')  // Wenn die Rautetaste gedrückt wurde...
@@ -179,7 +177,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
         z2 = 1;
         z3 = 1;
         z4 = 1;       // Der Zugang für die erste Zeicheneingabe wird wieder freigeschaltet
-        goto start;  //An dieser Stelle springt der Sketch zur Eingabe der Taste zurück, damit das Zeichen "#" nicht im folgenden Abschlitt als Codeeingabe gewertet wird.
+         //An dieser Stelle springt der Sketch zur Eingabe der Taste zurück, damit das Zeichen "#" nicht im folgenden Abschlitt als Codeeingabe gewertet wird.
       }
     }
     // Ab hier werden die vier Code-positionen unter den Variablen C1 bis C4 abgespeichert. Damit die eingegebenen Zeichen auch an der richtigen Position des Passwortes gespeichert werden, wird mit den Variablen z1 bis z4 der Zugang zu den einzelnen Positinen freigegeben oder gesperrt.
@@ -193,7 +191,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
       z2 = 0;
       z3 = 1;
       z4 = 1;  // Zugang zur zweiten Zeicheneingabe freischalten
-      goto Anfang;
+      
     }
 
     if (z2 == 0)  // Wenn das zweite Zeichen noch nicht gespeichert wurde...
@@ -206,7 +204,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
       z2 = 1;
       z3 = 0;
       z4 = 1;  // Zugang zur dritten Zeicheneingabe freischalten
-      goto Anfang;
+    
     }
 
     if (z3 == 0)  // Wenn das dritte Zeichen noch nicht gespeichert wurde...
@@ -219,7 +217,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
       z2 = 1;
       z3 = 1;
       z4 = 0;  // Zugang zur vierten Zeicheneingabe freischalten
-      goto Anfang;
+      
     }
 
     if (z4 == 0)  // Wenn das vierte Zeichen noch nicht gespeichert wurde...
@@ -244,7 +242,7 @@ Anfang:                         // Dies ist eine Markierung, zu der per "goto-"B
     while (distanz <= 50) {
       delay(3000);
       Motor.step(-512);
-      goto start;
+      
     }
   }
 }
